@@ -8,10 +8,10 @@ jobs:
   build-and-push:
     runs-on: self-hosted
     steps:
-      - name: Local Build Preparation
+      - name: Initialize Workspace
         shell: pwsh
         run: |
-          Write-Host "Checking local files for build..."
+          Write-Host "Preparing stock data analysis workspace..."
           Get-ChildItem -Force
 
       - name: Set up QEMU
@@ -26,24 +26,24 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push Stock Analysis Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/face_estimator:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/stock_analyzer:latest
 
       - name: Generate Deployment Summary
         shell: pwsh
         run: |
-          "### Face Estimator deployment verification" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8
+          "### Stock Data Analysis deployment verification" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8
           "" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
-          "Result: SUCCESS | Stable URL: http://127.0.0.1:8081/ | Window (UTC): 2026-11-02T11:32:38.4789750Z to 2026-11-02T11:35:09.6735100Z" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+          "Result: SUCCESS | Stable URL: http://127.0.0.1:8000/ | Window (UTC): 2026-11-02T11:32:38.4789750Z to 2026-11-02T11:35:09.6735100Z" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
           "API requests: 138 total; 138 successful: 0 failed; request IDs contiguous: True." | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
           "" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
           "### Before / during / after" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
           "| Stage | Requests (ok/total) | Representative request | UTC start | HTTP | Analysis | Response revision | Result |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
           "|---|---|---|---|---|---|---|---|" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
-          "| Before | 1/1 | #1 | 2026-11-02T11:32:38.4789750Z | 200 | True | d8a41890004c34977a77267ffca861944e67a4a1 | faces=1: 여성, age 0-9 |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
-          "| During | 109/109 | #80 | 2026-11-02T11:34:05.8352095Z | 200 | True | d69971e28d85793229f2e17a98f148463cf75cb8 | faces=1: 여성, age 0-9 |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
-          "| After | 28/28 | #111 | 2026-11-02T11:34:39.3096014Z | 200 | True | d69971e28d85793229f2e17a98f148463cf75cb8 | faces=1: 여성, age 0-9 |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+          "| Before | 1/1 | #1 | 2026-11-02T11:32:38.4789750Z | 200 | True | d8a41890004c34977a77267ffca861944e67a4a1 | stock_data: AAPL, trend=UP |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+          "| During | 109/109 | #80 | 2026-11-02T11:34:05.8352095Z | 200 | True | d69971e28d85793229f2e17a98f148463cf75cb8 | stock_data: TSLA, trend=UP |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+          "| After | 28/28 | #111 | 2026-11-02T11:34:39.3096014Z | 200 | True | d69971e28d85793229f2e17a98f148463cf75cb8 | stock_data: TSLA, trend=UP |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
