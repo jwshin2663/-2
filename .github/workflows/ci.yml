@@ -47,3 +47,15 @@ jobs:
           "| Before | 1/1 | #1 | 2026-11-02T11:32:38.4789750Z | 200 | True | d8a41890004c34977a77267ffca861944e67a4a1 | stock_data: AAPL, trend=UP |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
           "| During | 109/109 | #80 | 2026-11-02T11:34:05.8352095Z | 200 | True | d69971e28d85793229f2e17a98f148463cf75cb8 | stock_data: TSLA, trend=UP |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
           "| After | 28/28 | #111 | 2026-11-02T11:34:39.3096014Z | 200 | True | d69971e28d85793229f2e17a98f148463cf75cb8 | stock_data: TSLA, trend=UP |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+```[cite: 3]
+
+---
+
+### 🛠️ 지금 당장 실행해야 할 터미널 명령어
+
+VS Code 하단 터미널에 아래 명령어를 순서대로 입력해 주세요. (아까 빌드가 멈췄던 용량 문제를 막기 위해 `.dockerignore`도 같이 확실히 적용합니다.)
+
+1. **최상단 폴더에 `.dockerignore` 파일이 없다면 생성** (있으면 생략 가능)
+   터미널에 아래를 복사해서 붙여넣으세요:
+   ```powershell
+   "__pycache__`nvenv`n.git`n.github`nactions-runner" | Out-File -FilePath .dockerignore -Encoding utf8
