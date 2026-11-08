@@ -8,17 +8,9 @@ jobs:
   build-and-push:
     runs-on: self-hosted
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: false
-          clean: true
-
-      - name: Force clean Git config and submodules
+      - name: Copy workspace files manually
         run: |
-          git submodule deinit -f . || true
-          git rm -f .gitmodules || true
-          git config --global --unset-all submodule. || true
+          echo "Preparing build workspace..."
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
