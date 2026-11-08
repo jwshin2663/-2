@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          submodules: false
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -38,4 +40,3 @@ jobs:
           echo "|---|---|---|---|---|---|---|---|" >> $GITHUB_STEP_SUMMARY
           echo "| Before | 1/1 | #1 | 2026-11-02T11:32:38 | 200 | True | d8a41890... | faces=1: 여성, age 0-9 |" >> $GITHUB_STEP_SUMMARY
           echo "| During | 109/109 | #80 | 2026-11-02T11:34:05 | 200 | True | d69971e2... | faces=1: 여성, age 0-9 |" >> $GITHUB_STEP_SUMMARY
-          
