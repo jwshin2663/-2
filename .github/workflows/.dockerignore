@@ -1,0 +1,8 @@
+.git
+.github
+actions-runner
+venv
+__pycache__
+*.pyc
+.vscode
+node_modules
