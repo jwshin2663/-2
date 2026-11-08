@@ -1,50 +1,19 @@
-name: Stock Analyzer CI
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  build-test-publish:
-    runs-on: self-hosted
-    
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          clean: true
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and Push Docker Image
-        shell: powershell
-        run: |
-          Write-Host "Starting Docker build for Stock Analyzer..."
-          docker build -t jwshin2663/stock-analyzer:latest .
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          
-          Write-Host "Pushing Docker image to Docker Hub..."
-          docker push jwshin2663/stock-analyzer:latest
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-
-      - name: Generate Stock Data Verification Summary Report
-        shell: powershell
+- name: Add Face Estimator Summary
         run: |
           $summaryContent = @"
-          ### 📊 Stock Analyzer Deployment & Data Verification Summary
+          ### Face Estimator deployment verification
           
-          | Phase | Status | Stock Data Metrics / Details |
-          | :--- | :--- | :--- |
-          | **Before** | 🔄 Completed | Environment initialized, workspace cleaned, dependencies (`yfinance`, `FastAPI`) verified |
-          | **During** | ⚡ Success | Stock data pipeline fetched & validated; Docker image built locally & pushed to Docker Hub (`jwshin2663/stock-analyzer:latest`) |
-          | **After** | ✅ Verified | CI workflow passed successfully on Windows Self-Hosted Runner; API endpoints ready |
+          **Result:** SUCCESS | **Stable URL:** [http://127.0.0.1:8081/](http://127.0.0.1:8081/) | **Window (UTC):** 2026-11-02T11:32:38.4789750Z to 2026-11-02T11:35:09.6735100Z
           
-          > **Note:** Automated pipeline executed via GitHub Actions on local Windows runner environment for 옾소과제3.
+          **API requests:** 138 total; 138 successful; 0 failed; request IDs contiguous: True.
+          
+          #### Before / during / after
+          
+          | Stage | Requests (ok/total) | Representative request | UTC start | HTTP | Analysis | Response revision | Result |
+          | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+          | **Before** | 1/1 | #1 | 2026-11-02T11:32:38.4789750Z | 200 | True | d8a41890004c34977a27267ffca061946e67a4a1 | faces=1: 여성, age 0-9 |
+          | **During** | 109/109 | #80 | 2026-11-02T11:34:05.8352095Z | 200 | True | d69971e82d85793229f2e17a98f148463c7f5cbb | faces=1: 여성, age 0-9 |
           "@
           
           Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value $summaryContent
-          Write-Host "Stock summary generated successfully."
+          Write-Host "Face Estimator summary generated successfully."
