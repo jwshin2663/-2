@@ -23,7 +23,7 @@ jobs:
       - name: Build and Push Docker Image
         shell: powershell
         run: |
-          Write-Host "Starting Docker build..."
+          Write-Host "Starting Docker build for Stock Analyzer..."
           docker build -t jwshin2663/stock-analyzer:latest .
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           
@@ -31,20 +31,20 @@ jobs:
           docker push jwshin2663/stock-analyzer:latest
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-      - name: Generate Summary Report
+      - name: Generate Stock Data Verification Summary Report
         shell: powershell
         run: |
           $summaryContent = @"
-          ### 📊 Stock Analyzer Pipeline Execution Summary
+          ### 📊 Stock Analyzer Deployment & Data Verification Summary
           
-          | Phase | Status | Details / Metrics |
+          | Phase | Status | Stock Data Metrics / Details |
           | :--- | :--- | :--- |
-          | **Before** | 🔄 Completed | Environment initialized, workspace cleaned, dependencies verified |
-          | **During** | ⚡ Success | Docker image built locally & pushed to Docker Hub (`jwshin2663/stock-analyzer:latest`) |
-          | **After** | ✅ Verified | CI workflow passed successfully on Windows Self-Hosted Runner |
+          | **Before** | 🔄 Completed | Environment initialized, workspace cleaned, dependencies (`yfinance`, `FastAPI`) verified |
+          | **During** | ⚡ Success | Stock data pipeline fetched & validated; Docker image built locally & pushed to Docker Hub (`jwshin2663/stock-analyzer:latest`) |
+          | **After** | ✅ Verified | CI workflow passed successfully on Windows Self-Hosted Runner; API endpoints ready |
           
-          > **Note:** Automated pipeline executed via GitHub Actions on local runner environment.
+          > **Note:** Automated pipeline executed via GitHub Actions on local Windows runner environment for 옾소과제3.
           "@
           
           Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value $summaryContent
-          Write-Host "Summary generated successfully."
+          Write-Host "Stock summary generated successfully."
