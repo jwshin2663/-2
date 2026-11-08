@@ -6,8 +6,7 @@ on:
 
 env:
   IMAGE: stock-analyzer
-  URL: http://127.0.0.1:8081/   # 검증할 API 주소 (필요하면 경로 수정)
-
+  URL: http://127.0.0.1:8081/api/health
 jobs:
   build:
     runs-on: self-hosted
