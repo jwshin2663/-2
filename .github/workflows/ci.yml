@@ -8,13 +8,14 @@ jobs:
   build-and-push:
     runs-on: self-hosted
     steps:
-      - name: Copy local files directly (Bypass Git -2 bug)
+      - name: Prepare Workspace Files
         shell: pwsh
         run: |
-          Write-Host "Copying project files from local directory..."
-          $sourceDir = ".."
-          Get-ChildItem -Path $sourceDir -Exclude "actions-runner", ".git" | Copy-Item -Destination "." -Recurse -Force
-          Write-Host "File copy completed successfully."
+          Write-Host "Copying core files..."
+          Copy-Item -Path "..\main.py" -Destination "." -Force -ErrorAction SilentlyContinue
+          Copy-Item -Path "..\Dockerfile" -Destination "." -Force -ErrorAction SilentlyContinue
+          Copy-Item -Path "..\requirements.txt" -Destination "." -Force -ErrorAction SilentlyContinue
+          Get-ChildItem
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
