@@ -26,3 +26,4 @@ models/
 *.safetensors
 .chrome-*/
 .edge-*/
+actions-runner/
