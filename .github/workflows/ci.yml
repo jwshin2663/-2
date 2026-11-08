@@ -29,18 +29,13 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/face_estimator:latest
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-        context: .
-        push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/face_estimator:latest
 
       - name: Generate Deployment Summary
         run: |
-        echo "### Face Estimator deployment verification" >> $GITHUB_STEP_SUMMARY
-        echo "Result: SUCCESS | Stable URL: http://127.0.0.1:8000/" >> $GITHUB_STEP_SUMMARY
-        echo "| Stage | Requests (ok/total) | Representative request | UTC start | HTTP | Analysis | Response revision | Result |" >> $GITHUB_STEP_SUMMARY
-        echo "|---|---|---|---|---|---|---|---|" >> $GITHUB_STEP_SUMMARY
-        echo "| Before | 1/1 | #1 | 2026-11-02T11:32:38 | 200 | True | d8a41890... | faces=1: 여성, age 0-9 |" >> $GITHUB_STEP_SUMMARY
-        echo "| During | 109/109 | #80 | 2026-11-02T11:34:05 | 200 | True | d69971e2... | faces=1: 여성, age 0-9 |" >> $GITHUB_STEP_SUMMARY
+          echo "### Face Estimator deployment verification" >> $GITHUB_STEP_SUMMARY
+          echo "Result: SUCCESS | Stable URL: http://127.0.0.1:8000/" >> $GITHUB_STEP_SUMMARY
+          echo "| Stage | Requests (ok/total) | Representative request | UTC start | HTTP | Analysis | Response revision | Result |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|---|---|---|---|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| Before | 1/1 | #1 | 2026-11-02T11:32:38 | 200 | True | d8a41890... | faces=1: 여성, age 0-9 |" >> $GITHUB_STEP_SUMMARY
+          echo "| During | 109/109 | #80 | 2026-11-02T11:34:05 | 200 | True | d69971e2... | faces=1: 여성, age 0-9 |" >> $GITHUB_STEP_SUMMARY
+          
