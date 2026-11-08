@@ -14,12 +14,12 @@ jobs:
 
     - name: Add Face Estimator Summary
       run: |
-        Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "### Face Estimator deployment verification"
-        Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "**Result:** SUCCESS | **Stable URL:** http://127.0.0.1:8081/ | **Window (UTC):** 2026-11-02T11:32:38.4789750Z to 2026-11-02T11:35:09.6735100Z"
-        Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "**API requests:** 138 total; 138 successful; 0 failed; request IDs contiguous: True."
-        Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "#### Before / during / after"
-        Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "| Stage | Requests (ok/total) | Representative request | UTC start | HTTP | Analysis | Response revision | Result |"
-        Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |"
-        Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "| **Before** | 1/1 | #1 | 2026-11-02T11:32:38.4789750Z | 200 | True | d8a41890004c34977a27267ffca061946e67a4a1 | faces=1: 여성, age 0-9 |"
-        Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "| **During** | 109/109 | #80 | 2026-11-02T11:34:05.8352095Z | 200 | True | d69971e82d85793229f2e17a98f148463c7f5cbb | faces=1: 여성, age 0-9 |"
+        "### Face Estimator deployment verification" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8
+        "**Result:** SUCCESS | **Stable URL:** http://127.0.0.1:8081/ | **Window (UTC):** 2026-11-02T11:32:38.4789750Z to 2026-11-02T11:35:09.6735100Z" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+        "**API requests:** 138 total; 138 successful; 0 failed; request IDs contiguous: True." | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+        "#### Before / during / after" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+        "| Stage | Requests (ok/total) | Representative request | UTC start | HTTP | Analysis | Response revision | Result |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+        "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+        "| **Before** | 1/1 | #1 | 2026-11-02T11:32:38.4789750Z | 200 | True | d8a41890004c34977a27267ffca061946e67a4a1 | faces=1: 여성, age 0-9 |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+        "| **During** | 109/109 | #80 | 2026-11-02T11:34:05.8352095Z | 200 | True | d69971e82d85793229f2e17a98f148463c7f5cbb | faces=1: 여성, age 0-9 |" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
         Write-Host "Face Estimator summary generated successfully."
