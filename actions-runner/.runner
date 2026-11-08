@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 2,
+  "agentName": "DESKTOP-THRO02H",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus14.actions.githubusercontent.com/6QBmBg7zajiNcGrhZ82BlqC8TxH4jIQLnO49Kt1wg24vvft5UO/",
+  "gitHubUrl": "https://github.com/jwshin2663/-2",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}
