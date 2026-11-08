@@ -14,6 +14,12 @@ jobs:
           submodules: false
           clean: true
 
+      - name: Force clean Git config and submodules
+        run: |
+          git submodule deinit -f . || true
+          git rm -f .gitmodules || true
+          git config --global --unset-all submodule. || true
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
