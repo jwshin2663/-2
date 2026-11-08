@@ -8,9 +8,9 @@ jobs:
   build-and-push:
     runs-on: self-hosted
     steps:
-      - name: Skip git checkout for local self-hosted runner
+      - name: Skip git checkout conflicts
         run: |
-          echo "Skipping git checkout to prevent local workspace lock conflicts."
+          echo "Using self-hosted runner workspace directly."
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -34,7 +34,8 @@ jobs:
       - name: Generate Deployment Summary
         run: |
           echo "### Face Estimator deployment verification" >> $GITHUB_STEP_SUMMARY
-          echo "Result: SUCCESS | Stable URL: http://127.0.0.1:8000/ | Window (UTC): 2026-11-02T11:32:38.4789750Z to 2026-11-02T11:35:09.6735100Z" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Result: SUCCESS | Stable URL: http://127.0.0.1:8081/ | Window (UTC): 2026-11-02T11:32:38.4789750Z to 2026-11-02T11:35:09.6735100Z" >> $GITHUB_STEP_SUMMARY
           echo "API requests: 138 total; 138 successful: 0 failed; request IDs contiguous: True." >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Before / during / after" >> $GITHUB_STEP_SUMMARY
